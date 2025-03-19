@@ -16,10 +16,12 @@ export type ValidSizes = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
 export type ValidTypes = "shirts" | "pants" | "hoodies" | "hats";
 
 interface SeedData {
+  categories: string[];
   products: Product[];
 }
 
 export const initialData: SeedData = {
+  categories: ["Shirts", "Pants", "Hoodies", "Hats"],
   products: [
     {
       description:
