@@ -3,7 +3,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Telso | Shop",
+  title: {
+    template: "%s - Telso | Shop",
+    default: "Home - Telso | Shop",
+  },
   description: "venta de productos de vestimentea para hombre y mujer",
 };
 
