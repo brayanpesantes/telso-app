@@ -12,3 +12,4 @@ export * from "./product/product-mobile-slide-show";
 export * from "./product/product-slide-show";
 export * from "./product/quantity-selector";
 export * from "./product/size-selector";
+export * from "./product/stock-label";
