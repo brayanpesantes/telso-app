@@ -1,4 +1,4 @@
-import { Sidebar, TopMenu } from "@/components";
+import { Footer, Sidebar, TopMenu } from "@/components";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -6,6 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <TopMenu />
       <Sidebar />
       <div className="px-0 sm:px-10">{children}</div>
+      <Footer />
     </main>
   );
 }
