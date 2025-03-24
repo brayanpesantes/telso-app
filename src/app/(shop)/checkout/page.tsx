@@ -1,7 +1,7 @@
-import { QuantitySelector, Title } from "@/components";
-import Link from "next/link";
+import { Title } from "@/components";
 import { initialData } from "@/seed/seed";
 import Image from "next/image";
+import Link from "next/link";
 
 const productsInCart = [
   initialData.products[0],
@@ -71,7 +71,7 @@ export default function CheckoutPage() {
               <p className="mb-5">
                 {/* Disclaimer */}
                 <span className="text-xs">
-                  Al hacer clic en "Colocar orden, aceptas nuestros{" "}
+                  Al hacer clic en &quot;Colocar orden&quot;, aceptas nuestros{" "}
                   <a href="#" className="underline">
                     términos y condiciones
                   </a>{" "}

@@ -49,6 +49,8 @@ export const getPaginationProductWithImages = async ({
       })),
     };
   } catch (error) {
+    console.log(error);
+
     throw new Error("No se pudo obtener los datos");
   }
 };

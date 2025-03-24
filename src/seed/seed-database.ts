@@ -24,7 +24,7 @@ async function main() {
   // Productos
 
   products.forEach(async (product) => {
-    const { images, type, ...productData } = product;
+    const { images, ...productData } = product;
     const productDB = await prisma.product.create({
       data: {
         ...productData,

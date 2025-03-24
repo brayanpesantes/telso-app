@@ -1,7 +1,6 @@
+import { inter } from "@/config/fonts";
 import type { Metadata } from "next";
 import "./globals.css";
-import { inter } from "@/config/fonts";
-import { TopMenu } from "@/components/ui/top-menu";
 
 export const metadata: Metadata = {
   title: "Telso | Shop",
