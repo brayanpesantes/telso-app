@@ -1,3 +1,5 @@
+import { Size } from "@prisma/client";
+
 export interface Product {
   id: string;
   description: string;
@@ -14,3 +16,13 @@ export interface Product {
 
 export type ValidSizes = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
 export type ValidTypes = "shirts" | "pants" | "hoodies" | "hats";
+
+export interface CartProduct {
+  id: string;
+  slug: string;
+  title: string;
+  price: number;
+  quantity: number;
+  size: Size | undefined;
+  image: string;
+}
