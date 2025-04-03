@@ -4,9 +4,8 @@ import { redirect } from "next/navigation";
 
 export default async function Page() {
   const session = await auth();
-  if (session?.user) {
-    // redirect("/auth/login?callbackUrl=/prefil");
-    redirect("/");
+  if (!session?.user) {
+    redirect("/auth/login?callbackUrl=/profile");
   }
   return (
     <div>

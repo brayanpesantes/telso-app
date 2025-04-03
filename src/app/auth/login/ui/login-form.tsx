@@ -9,7 +9,7 @@ import { IoInformationOutline } from "react-icons/io5";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callback") || "/dashaborad";
+  const callbackUrl = searchParams.get("callbackUrl") || "/profile";
   const [errorMessage, formAction, isPending] = useActionState(
     authenticate,
     undefined
@@ -32,7 +32,7 @@ export const LoginForm = () => {
         name="password"
         required
       />
-      <input type="hidden" name="redirecto" value={callbackUrl} />
+      <input type="hidden" name="redirectTo" value={callbackUrl} />
 
       <button
         className={clsx({

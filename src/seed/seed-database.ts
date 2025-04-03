@@ -25,23 +25,26 @@ async function main() {
   }, {} as Record<string, string>);
 
   // Productos
+  // Fix: Using Promise.all to properly wait for all async operations
+  await Promise.all(
+    products.map(async (product) => {
+      const { type, images, ...productData } = product;
+      
+      const productDB = await prisma.product.create({
+        data: {
+          ...productData,
+          categoryId: categoriesMap[type], // Map the type to the correct categoryId
+        },
+      });
 
-  products.forEach(async (product) => {
-    const { images, ...productData } = product;
-    const productDB = await prisma.product.create({
-      data: {
-        ...productData,
-        categoryId: categoriesMap[product.type],
-      },
-    });
-
-    //images
-    const imagesData = images.map((image) => ({
-      url: image,
-      productId: productDB.id,
-    }));
-    await prisma.productImage.createMany({ data: imagesData });
-  });
+      //images
+      const imagesData = images.map((image) => ({
+        url: image,
+        productId: productDB.id,
+      }));
+      await prisma.productImage.createMany({ data: imagesData });
+    })
+  );
 
   console.log("seed ejecutado correctamente...");
 }
