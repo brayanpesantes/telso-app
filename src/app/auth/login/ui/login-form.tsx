@@ -1,19 +1,25 @@
 "use client";
-
 import { authenticate } from "@/actions";
 import clsx from "clsx";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { useActionState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useActionState, useEffect } from "react";
 import { IoInformationOutline } from "react-icons/io5";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const callbackUrl = searchParams.get("callbackUrl") || "/profile";
   const [errorMessage, formAction, isPending] = useActionState(
     authenticate,
     undefined
   );
+
+  useEffect(() => {
+    if (errorMessage === "success") {
+      router.replace("/");
+    }
+  }, [errorMessage]);
 
   return (
     <form action={formAction} className="flex flex-col">
