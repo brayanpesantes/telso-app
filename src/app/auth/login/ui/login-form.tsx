@@ -2,13 +2,12 @@
 import { authenticate } from "@/actions";
 import clsx from "clsx";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { IoInformationOutline } from "react-icons/io5";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const callbackUrl = searchParams.get("callbackUrl") || "/profile";
   const [errorMessage, formAction, isPending] = useActionState(
     authenticate,
@@ -17,7 +16,8 @@ export const LoginForm = () => {
 
   useEffect(() => {
     if (errorMessage === "success") {
-      router.replace("/");
+      // router.replace("/");
+      window.location.replace("/");
     }
   }, [errorMessage]);
 
