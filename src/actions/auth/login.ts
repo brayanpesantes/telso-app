@@ -25,3 +25,17 @@ export async function authenticate(
     return "Unknown error";
   }
 }
+
+export const login = async (email: string, password: string) => {
+  try {
+    await signIn("credentials", {
+      email: email,
+      password: password,
+      redirect: false,
+    });
+    return { ok: true };
+  } catch (error) {
+    console.log(error);
+    return { ok: false, message: "No se pudo iniciar Session" };
+  }
+};
