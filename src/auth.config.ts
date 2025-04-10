@@ -5,10 +5,37 @@ import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 import { prisma } from "./lib/prisma";
 
+const autenticatedRoutes = ["checkout/address", "checkout"];
 export const authConfig: NextAuthConfig = {
   pages: {
     signIn: "/auth/login",
     newUser: "/auth/new-account",
+  },
+  callbacks: {
+    authorized({ auth, request: { nextUrl } }) {
+      const isLoggedIn = !!auth?.user;
+      const isAuthenticatedRoute = autenticatedRoutes.some((route) =>
+        nextUrl.pathname.startsWith(`/${route}`)
+      );
+
+      // For authenticated routes, user must be logged in
+      if (isAuthenticatedRoute) {
+        return isLoggedIn;
+      }
+
+      // For non-authenticated routes, allow access regardless of login status
+      return true;
+    },
+    jwt({ token, user }) {
+      if (user) {
+        token.data = user;
+      }
+      return token;
+    },
+    session({ session, token, user }) {
+      session.user = token.data as any;
+      return session;
+    },
   },
   providers: [
     Credentials({
