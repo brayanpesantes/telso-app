@@ -29,10 +29,12 @@ enum Gender {
   kid
   unisex
 }
+
 enum Role {
   ADMIN
   USER
 }
+
 model Category {
   id      String    @id @default(uuid())
   name    String
@@ -66,11 +68,16 @@ model ProductImage {
 }
 
 model User {
-  id    String @id @default(uuid())
-  name String
-  email String @unique
+  id            String    @id @default(uuid())
+  name          String
+  email         String    @unique
   emailVerified DateTime?
-  password String
-  role Role @default(USER)
-  image String?
-}  
+  password      String
+  role          Role      @default(USER)
+  image         String?
+}
+
+model Country {
+  id   String @id
+  name String
+}
