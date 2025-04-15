@@ -3,11 +3,9 @@
 import { useCartStore } from "@/store";
 import { currencyFormat } from "@/utils";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export const ProductsInCart = () => {
-  const router = useRouter();
   const [loaded, setLoaded] = useState(false);
   const productsInCart = useCartStore((state) => state.cart);
 
@@ -15,11 +13,6 @@ export const ProductsInCart = () => {
     setLoaded(true);
   }, []);
 
-  useEffect(() => {
-    if (productsInCart.length === 0 && loaded === true) {
-      router.replace("/empty");
-    }
-  }, [productsInCart, loaded]);
   if (!loaded) {
     return <div>cargando...</div>;
   }
