@@ -5,6 +5,10 @@ import { countries } from "./seed-countries";
 async function main() {
   // 1. Borrado previo de datos
   // await Promise.all([
+  await prisma.orderAddress.deleteMany();
+  await prisma.orderItem.deleteMany();
+  await prisma.order.deleteMany();
+
   await prisma.userAddress.deleteMany();
   await prisma.user.deleteMany();
 
