@@ -1,13 +1,7 @@
 import { Title } from "@/components";
-import { initialData } from "@/seed/seed";
-import Image from "next/image";
 import Link from "next/link";
+import { ProductsInCart } from "./ui/products-in-cart";
 
-const productsInCart = [
-  initialData.products[0],
-  initialData.products[1],
-  initialData.products[2],
-];
 export default function CheckoutPage() {
   return (
     <div className="flex justify-center items-center mb-72 px-10 sm:px-0">
@@ -21,24 +15,7 @@ export default function CheckoutPage() {
               Editar Carrito
             </Link>
             {/* Items */}
-            {productsInCart.map((product) => (
-              <div className="flex" key={product.slug}>
-                <Image
-                  src={`/products/${product.images[0]}`}
-                  style={{ width: "100px", height: "100px" }}
-                  width={100}
-                  height={100}
-                  alt={product.title}
-                  className="mr-5 rounded-s-xs"
-                />
-                <div className="flex-1">
-                  <p className="font-semibold">{product.title}</p>
-                  <p className="font-medium">${product.price}</p>
-                  <p className="font-bold">Subtotal: ${product.price * 3}</p>
-                  <button className="underline mt-3">Remover</button>
-                </div>
-              </div>
-            ))}
+            <ProductsInCart />
           </div>
           {/* checkout - Resumen de la orden  */}
           <div className="bg-white rounded-xl shadow-xl p-7 ">
