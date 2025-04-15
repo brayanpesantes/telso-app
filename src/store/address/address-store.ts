@@ -10,6 +10,7 @@ interface State {
     city: string;
     country: string;
     phone: string;
+    postalCode: string;
   };
 
   setAddress: (address: State["address"]) => void;
@@ -26,6 +27,7 @@ export const useAddressStore = create<State>()(
         city: "",
         country: "",
         phone: "",
+        postalCode: "",
       },
       setAddress: (address) => {
         set({ address });
