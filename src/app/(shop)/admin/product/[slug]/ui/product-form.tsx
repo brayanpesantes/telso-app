@@ -4,6 +4,7 @@ import { createUpdateProduct } from "@/actions";
 import { ProductImage } from "@/components";
 import type { Category, Product, ProductImage as TypeImage } from "@/interface";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 interface Props {
@@ -26,6 +27,7 @@ interface FormInputs {
 }
 
 export const ProductForm = ({ product, categories }: Props) => {
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -59,8 +61,12 @@ export const ProductForm = ({ product, categories }: Props) => {
     formData.append("categoryId", productToSave.categoryId);
     formData.append("gender", productToSave.gender);
 
-    const { ok } = await createUpdateProduct(formData);
-    console.log(ok);
+    const { ok, product: updateProduct } = await createUpdateProduct(formData);
+    if (!ok) {
+      alert("no se pudo actualizar el producto");
+      return;
+    }
+    router.replace(`/admin/product/${updateProduct?.slug}`);
   };
 
   const onSizeChange = async (size: string) => {

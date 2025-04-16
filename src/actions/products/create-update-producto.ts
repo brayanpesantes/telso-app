@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { Gender, Product, Size } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 const productSchema = z.object({
@@ -39,32 +40,42 @@ export const createUpdateProduct = async (formData: FormData) => {
   const tagArray = restProduct.tags
     .split(",")
     .map((tag) => tag.trim().toLowerCase());
-
-  const prismaTx = await prisma.$transaction(async (tx) => {
-    let product: Product;
-    if (id) {
-      product = await prisma.product.update({
-        where: { id },
-        data: {
-          ...restProduct,
-          sizes: { set: restProduct.sizes as Size[] },
-          tags: {
-            set: tagArray,
+  try {
+    const prismaTx = await prisma.$transaction(async (tx) => {
+      let product: Product;
+      if (id) {
+        product = await prisma.product.update({
+          where: { id },
+          data: {
+            ...restProduct,
+            sizes: { set: restProduct.sizes as Size[] },
+            tags: {
+              set: tagArray,
+            },
           },
-        },
-      });
-    } else {
-      product = await prisma.product.create({
-        data: {
-          ...restProduct,
-          sizes: { set: restProduct.sizes as Size[] },
-          tags: { set: tagArray },
-        },
-      });
-    }
+        });
+      } else {
+        product = await prisma.product.create({
+          data: {
+            ...restProduct,
+            sizes: { set: restProduct.sizes as Size[] },
+            tags: { set: tagArray },
+          },
+        });
+      }
+      return {
+        product,
+      };
+    });
+    revalidatePath("/admin/products");
+    revalidatePath(`/admin/products/${product.slug}`);
+    revalidatePath(`/product/${product.slug}`);
+
+    return { ok: true, product: prismaTx.product };
+  } catch (error) {
     return {
-      product,
+      ok: false,
+      message: "Revisar los logs, no se pudo actualizar/crear",
     };
-  });
-  return { ok: true };
+  }
 };
