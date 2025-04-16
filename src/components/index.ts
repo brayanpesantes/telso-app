@@ -14,4 +14,8 @@ export * from "./product/quantity-selector";
 export * from "./product/size-selector";
 export * from "./product/stock-label";
 
-export * from "./provider/provider";
+export * from "./providers/providers";
+
+export * from "./paypal/paypal-button";
+
+export * from "./orders/order-status";
