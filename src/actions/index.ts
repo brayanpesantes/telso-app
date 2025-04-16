@@ -19,3 +19,6 @@ export * from "./order/place-order";
 
 export * from "./payment/paypal-check-payment";
 export * from "./payment/set-transaction-id";
+
+export * from "./user/change-user-role";
+export * from "./user/get-paginate-users";
