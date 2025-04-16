@@ -2,6 +2,7 @@ export * from "./auth/login";
 export * from "./auth/logout";
 export * from "./auth/register";
 
+export * from "./products/create-update-producto";
 export * from "./products/get-product-by-slug";
 export * from "./products/get-stock-by-slug";
 export * from "./products/product-pagination";
@@ -22,3 +23,5 @@ export * from "./payment/set-transaction-id";
 
 export * from "./user/change-user-role";
 export * from "./user/get-paginate-users";
+
+export * from "./category/get-categories";
