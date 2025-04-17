@@ -29,21 +29,15 @@ interface FormInputs {
 
 export const ProductForm = ({ product, categories }: Props) => {
   const router = useRouter();
-  const {
-    handleSubmit,
-    register,
-    formState: { isValid },
-    getValues,
-    setValue,
-    watch,
-  } = useForm<FormInputs>({
-    defaultValues: {
-      ...product,
-      tags: product.tags?.join(", "),
-      sizes: product.sizes ?? [],
-      images: undefined,
-    },
-  });
+  const { handleSubmit, register, getValues, setValue, watch } =
+    useForm<FormInputs>({
+      defaultValues: {
+        ...product,
+        tags: product.tags?.join(", "),
+        sizes: product.sizes ?? [],
+        images: undefined,
+      },
+    });
   watch("sizes");
 
   const onSubmit = async (data: FormInputs) => {
@@ -79,7 +73,11 @@ export const ProductForm = ({ product, categories }: Props) => {
 
   const onSizeChange = async (size: string) => {
     const sizes = new Set(getValues("sizes"));
-    sizes.has(size) ? sizes.delete(size) : sizes.add(size);
+    if (sizes.has(size)) {
+      sizes.delete(size);
+    } else {
+      sizes.add(size);
+    }
 
     setValue("sizes", Array.from(sizes));
   };

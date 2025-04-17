@@ -6,7 +6,7 @@ import {
   StockLabel,
 } from "@/components";
 import { titleFont } from "@/config/fonts";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AddToCart } from "./ui/add-to-cart";
 
@@ -14,10 +14,7 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
   const { slug } = await params;
 

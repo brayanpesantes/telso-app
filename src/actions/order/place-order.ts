@@ -127,10 +127,12 @@ export const placeOrder = async (
       message: "Orden creada",
       order: prismaTx.order.id,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
+    console.log(error);
+
     return {
       ok: false,
-      message: error?.message,
+      message: "Error desconocido al crear la orden",
     };
   }
 };

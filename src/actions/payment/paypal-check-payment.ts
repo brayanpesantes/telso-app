@@ -64,10 +64,9 @@ const getPaypalBearerToken = async (): Promise<string | null> => {
   };
 
   try {
-    const result = await fetch(
-      "https://api-m.sandbox.paypal.com/v1/oauth2/token",
-      requestOptions
-    ).then((res) => res.json());
+    const result = await fetch(oaut2URL, requestOptions).then((res) =>
+      res.json()
+    );
     return result.access_token;
   } catch (error) {
     console.log(error);

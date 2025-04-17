@@ -23,7 +23,7 @@ export const ProductsInCart = () => {
     if (productsInCart.length === 0 && loaded === true) {
       router.replace("/empty");
     }
-  }, [productsInCart, loaded]);
+  }, [productsInCart, loaded, router]);
   if (!loaded) {
     return <div>cargando...</div>;
   }

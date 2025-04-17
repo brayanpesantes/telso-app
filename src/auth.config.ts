@@ -32,7 +32,8 @@ export const authConfig: NextAuthConfig = {
       }
       return token;
     },
-    session({ session, token, user }) {
+    session({ session, token }) {
+      // @typescript-eslint/no-explicit-any
       session.user = token.data as any;
       return session;
     },
@@ -55,7 +56,7 @@ export const authConfig: NextAuthConfig = {
 
         const isValidPassword = await bcryptjs.compare(password, user.password);
         if (!isValidPassword) return null;
-
+        // @typescript-eslint/no-unused-vars
         const { password: _, ...rest } = user;
 
         return rest;

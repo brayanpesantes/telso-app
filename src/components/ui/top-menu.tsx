@@ -12,7 +12,7 @@ export const TopMenu = () => {
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     setLoaded(true);
-  });
+  }, []);
   return (
     <nav className="flex px-5 justify-between items-center w-full">
       {/* logo */}
